@@ -1110,14 +1110,17 @@ h1, h2, h3, h4, h5, h6,
   /* Sparkle — centered below ART wall */
   .art-sparkle { opacity: 1; animation: none; }
 
-  /* Scroll cue — relative position in flex flow */
+  /* Scroll cue — pull out of absolute, center below hero */
   .scroll-cue {
-    position: relative;
-    bottom: auto; left: auto;
-    transform: none;
-    opacity: 1;
-    animation: none;
-    margin-top: 28px;
+    position: relative !important;
+    bottom: auto !important;
+    left: auto !important;
+    transform: none !important;
+    opacity: 1 !important;
+    animation: none !important;
+    margin: 28px auto 0;
+    text-align: center;
+    width: 100%;
   }
 
   /* Services */
@@ -1138,13 +1141,21 @@ h1, h2, h3, h4, h5, h6,
   .trust-item .trust-label { font-size: 10px; letter-spacing: 2px; }
 
   /* Van section — smaller, sign fully visible */
-  .construction-frame { height: 220px; }
-  .van-wrapper img.van-img { height: 120px; }
-  .sign-inner { padding: 14px 20px; white-space: normal; text-align: center; }
-  .sign-inner h2 { font-size: 24px; letter-spacing: 2px; }
-  .sign-inner p { font-size: 12px; letter-spacing: 4px; }
-  .construction-sign { bottom: 55px; }
-  .construction-sign { clip-path: none; opacity: 1; }
+  .construction-frame { height: 240px; }
+  .van-wrapper img.van-img { height: 130px; }
+  .construction-sign {
+    bottom: 70px;
+    clip-path: none !important;
+    opacity: 1;
+    white-space: normal;
+  }
+  .sign-inner {
+    padding: 14px 20px;
+    white-space: normal;
+    text-align: center;
+  }
+  .sign-inner h2 { font-size: 22px; letter-spacing: 2px; }
+  .sign-inner p { font-size: 11px; letter-spacing: 4px; }
 
   /* Career section */
   .career-section { padding: 70px 20px; }
@@ -1905,8 +1916,13 @@ h1, h2, h3, h4, h5, h6,
     }
 
     const vanLeft = x;
-    const clipRight = Math.max(0, frameWidth - vanLeft);
-    sign.style.clipPath = `inset(0 ${clipRight}px 0 0)`;
+    // Disable clip-path sign reveal on mobile — show sign fully
+    if (window.innerWidth > 768) {
+      const clipRight = Math.max(0, frameWidth - vanLeft);
+      sign.style.clipPath = `inset(0 ${clipRight}px 0 0)`;
+    } else {
+      sign.style.clipPath = 'none';
+    }
 
     requestAnimationFrame(updateVan);
   }
