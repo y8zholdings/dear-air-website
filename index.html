@@ -1,0 +1,1789 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dear Air, — Tech-Enabled HVAC Solutions</title>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ============================================
+   RESET & BASE
+   ============================================ */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --orange: #E8671C;
+  --orange-light: #f0844a;
+  --purple: #7B5EA7;
+  --purple-light: #9b82c0;
+  --purple-soft: rgba(123, 94, 167, 0.12);
+  --dark: #1a1a1a;
+  --gray-900: #222;
+  --gray-700: #555;
+  --gray-400: #999;
+  --gray-200: #e0e0e0;
+  --gray-100: #f5f5f5;
+  --cream: #FAF8F5;
+  --white: #ffffff;
+}
+
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+body {
+  font-family: 'DM Sans', 'Oswald', sans-serif;
+  color: var(--dark);
+  background: var(--white);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, h5, h6,
+.nav-links a,
+.career-badge span,
+.career-cta,
+.sign-inner h2,
+.sign-inner p,
+.trust-item .trust-label,
+.footer-tagline,
+.footer-links a,
+.footer-copy,
+.scroll-cue span {
+  font-family: 'Oswald', sans-serif;
+}
+
+/* ============================================
+   NAVIGATION
+   ============================================ */
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  background: rgba(255,255,255,0.95);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 2px solid var(--orange);
+  transition: box-shadow 0.3s ease;
+  overflow: visible;
+}
+
+.nav.scrolled {
+  box-shadow: 0 2px 20px rgba(0,0,0,0.08);
+}
+
+.nav-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  height: 56px;
+}
+
+.nav-logo {
+  display: flex;
+  align-items: center;
+}
+
+.nav-logo img {
+  height: 195px;
+  width: auto;
+  display: block;
+  margin: -70px 0;
+}
+
+.nav-links {
+  display: flex;
+  gap: 36px;
+  list-style: none;
+}
+
+.nav-links a {
+  font-weight: 500;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  color: var(--gray-700);
+  text-decoration: none;
+  transition: color 0.25s ease;
+  position: relative;
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--orange);
+  transition: width 0.3s ease;
+}
+
+.nav-links a:hover {
+  color: var(--orange);
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+/* Mobile nav toggle */
+.nav-toggle {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+}
+
+.nav-toggle span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: var(--dark);
+  margin: 5px 0;
+  transition: all 0.3s ease;
+}
+
+/* ============================================
+   HERO SECTION
+   ============================================ */
+.hero {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  min-height: 600px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: var(--white);
+  cursor: default;
+}
+
+.hero-composition {
+  position: relative;
+  width: 950px;
+  height: 520px;
+  isolation: isolate;
+}
+
+/* Deer — staggered load: 0.5s */
+.deer-layer {
+  position: absolute;
+  bottom: 120px;
+  left: -60px;
+  z-index: 1;
+  width: 155px;
+  height: auto;
+  opacity: 0;
+  animation: deerReveal 1s ease-out 0.5s forwards;
+  transform-origin: bottom center;
+}
+.deer-layer img { width: 100%; height: auto; display: block; }
+.deer-layer .deer-shadow-static {
+  position: absolute;
+  bottom: -4px;
+  left: 10%;
+  width: 80%;
+  height: 12px;
+  background: radial-gradient(ellipse at center, rgba(0,0,0,0.15) 0%, transparent 70%);
+  border-radius: 50%;
+  z-index: 0;
+}
+
+@keyframes deerReveal {
+  0% { opacity: 0; transform: translateX(-20px); }
+  100% { opacity: 1; transform: translateX(0); }
+}
+
+/* Air stream — staggered load: 0.8s */
+.air-stream-layer {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  z-index: 10;
+  pointer-events: none;
+  opacity: 0;
+  animation: ribbonFadeIn 1.2s ease-out 0.8s forwards;
+}
+@keyframes ribbonFadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+.air-stream-svg {
+  position: absolute;
+  top: 0; left: -30%;
+  width: 200%; height: 100%;
+}
+.air-ribbon { fill: none; stroke-linecap: round; }
+/* Air ribbons — turquoise/cyan for natural air feel */
+.ribbon-1 { stroke: rgba(56, 181, 200, 0.45); stroke-width: 17; }
+.ribbon-2 { stroke: rgba(56, 181, 200, 0.30); stroke-width: 12; }
+.ribbon-3 { stroke: rgba(100, 200, 220, 0.22); stroke-width: 27; }
+.ribbon-4 { stroke: rgba(56, 181, 200, 0.38); stroke-width: 10; }
+.ribbon-5 { stroke: rgba(140, 220, 235, 0.16); stroke-width: 33; }
+.air-loop {
+  fill: none;
+  stroke: rgba(56, 181, 200, 0.4);
+  stroke-width: 14;
+  stroke-linecap: round;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Wordmark — staggered load: 1.5s */
+.wordmark-layer {
+  position: absolute;
+  top: 50%;
+  left: 30px;
+  transform: translateY(-55%);
+  z-index: 20;
+  opacity: 0;
+  animation: wordReveal 0.9s cubic-bezier(0.16, 1, 0.3, 1) 1.5s forwards;
+}
+.wordmark-layer img { width: 540px; height: auto; display: block; }
+
+@keyframes wordReveal {
+  0% { opacity: 0; transform: translateY(-55%) translateY(25px); }
+  100% { opacity: 1; transform: translateY(-55%) translateY(0); }
+}
+
+/* ART "award wall" — staggered load: 2.2s, enhanced frosted glass */
+.art-wall-wrapper {
+  position: absolute;
+  top: 100px;
+  right: 40px;
+  z-index: 50;
+  opacity: 0;
+  animation: artBoxReveal 0.9s ease-out 2.2s forwards;
+}
+
+.art-wall {
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(18px) saturate(1.4);
+  -webkit-backdrop-filter: blur(18px) saturate(1.4);
+  border-left: 5px solid var(--orange);
+  border-right: 5px solid var(--orange);
+  padding: 52px 44px;
+  text-align: center;
+  position: relative;
+  box-shadow: 0 8px 48px rgba(0,0,0,0.08), inset 0 0 0 1px rgba(255,255,255,0.5);
+}
+
+/* Decorative top/bottom accent bars */
+.art-wall::before,
+.art-wall::after {
+  content: '';
+  position: absolute;
+  left: 20%; right: 20%;
+  height: 3px;
+  background: var(--orange);
+}
+.art-wall::before { top: 12px; }
+.art-wall::after { bottom: 12px; }
+
+@keyframes artBoxReveal {
+  0% { opacity: 0; transform: translateX(30px); }
+  100% { opacity: 1; transform: translateX(0); }
+}
+
+/* Five-star sparkle badge beneath ART wall */
+.art-sparkle {
+  text-align: center;
+  margin-top: 14px;
+  opacity: 0;
+  animation: sparkleFadeIn 0.8s ease-out 2.8s forwards;
+}
+
+.art-sparkle .stars {
+  display: flex;
+  justify-content: center;
+  gap: 3px;
+  margin-bottom: 4px;
+}
+
+.art-sparkle .stars svg {
+  width: 22px;
+  height: 22px;
+}
+
+.art-sparkle .sparkle-text {
+  font-family: 'DM Sans', sans-serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: 13px;
+  letter-spacing: 1px;
+  color: var(--gray-400);
+}
+
+@keyframes sparkleFadeIn {
+  0% { opacity: 0; transform: translateY(6px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+.art-acronym {
+  display: flex;
+  justify-content: center;
+  gap: 32px;
+  margin-bottom: 28px;
+}
+
+.art-word {
+  text-align: center;
+}
+
+.art-word .letter {
+  font-weight: 700;
+  font-size: 58px;
+  color: var(--orange);
+  display: block;
+  line-height: 1;
+}
+
+.art-word .full-word {
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 400;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  color: var(--gray-700);
+  margin-top: 6px;
+}
+
+.art-tagline {
+  font-weight: 300;
+  font-size: 18px;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  color: var(--gray-700);
+  margin-top: 10px;
+  line-height: 1.5;
+}
+
+.art-tagline em {
+  font-style: normal;
+  color: var(--purple);
+  font-weight: 600;
+}
+
+/* Scroll cue */
+.scroll-cue {
+  position: absolute;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 30;
+  text-align: center;
+  opacity: 0;
+  animation: cueFade 1s ease 3s forwards;
+}
+.scroll-cue span {
+  font-size: 11px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--gray-400);
+  font-weight: 400;
+}
+.scroll-cue .arrow {
+  display: block;
+  margin: 6px auto 0;
+  width: 18px;
+  height: 18px;
+  border-right: 2px solid var(--gray-400);
+  border-bottom: 2px solid var(--gray-400);
+  transform: rotate(45deg);
+  animation: arrowBounce 1.5s ease-in-out infinite;
+}
+@keyframes cueFade {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+@keyframes arrowBounce {
+  0%, 100% { transform: rotate(45deg) translate(0, 0); }
+  50% { transform: rotate(45deg) translate(3px, 3px); }
+}
+
+/* ============================================
+   SECTION DIVIDERS — varied transitions
+   ============================================ */
+.divider-line {
+  width: 100%;
+  height: 3px;
+  background: var(--orange);
+  position: relative;
+  z-index: 50;
+}
+
+.divider-gradient {
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(90deg, var(--orange), var(--purple), var(--orange));
+  position: relative;
+  z-index: 50;
+}
+
+.divider-purple {
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, var(--purple) 0%, var(--purple-light) 50%, var(--purple) 100%);
+  position: relative;
+  z-index: 50;
+}
+
+/* ============================================
+   SERVICES SECTION
+   ============================================ */
+.services-section {
+  padding: 80px 40px 100px;
+  background: var(--cream);
+  position: relative;
+}
+
+.services-header {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.services-header h2 {
+  font-weight: 700;
+  font-size: clamp(28px, 4vw, 48px);
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  color: var(--dark);
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.service-card {
+  background: var(--white);
+  border: 2px solid transparent;
+  border-top: 4px solid var(--gray-200);
+  border-radius: 4px;
+  padding: 48px 36px;
+  text-align: center;
+  transition: all 0.4s ease;
+  cursor: default;
+  opacity: 0;
+  transform: translateY(30px);
+  position: relative;
+  overflow: hidden;
+}
+
+.service-card.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Color-coded accent bars: purple for cooling, orange for heating, orange for maintenance */
+.service-card.card-cooling { border-top-color: var(--purple); }
+.service-card.card-heating { border-top-color: var(--orange); }
+.service-card.card-maintenance { border-top-color: var(--orange-light); }
+
+.service-card:hover {
+  border-color: transparent;
+  box-shadow: 0 12px 36px rgba(0,0,0,0.08);
+  transform: translateY(-6px);
+}
+.service-card.card-cooling:hover { border-top-color: var(--purple); box-shadow: 0 12px 36px rgba(123, 94, 167, 0.12); }
+.service-card.card-heating:hover { border-top-color: var(--orange); box-shadow: 0 12px 36px rgba(232, 103, 28, 0.12); }
+.service-card.card-maintenance:hover { border-top-color: var(--orange-light); box-shadow: 0 12px 36px rgba(240, 132, 74, 0.12); }
+
+.service-card .card-icon {
+  width: 48px;
+  height: 48px;
+  margin: 0 auto 20px;
+  transition: transform 0.4s ease;
+}
+
+.service-card:hover .card-icon {
+  transform: scale(1.12) rotate(-3deg);
+}
+
+.service-card h3 {
+  font-weight: 600;
+  font-size: 22px;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  color: var(--dark);
+  margin-bottom: 14px;
+}
+
+.service-card p {
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--gray-700);
+  letter-spacing: 0.3px;
+}
+
+/* ============================================
+   TRUST STRIP
+   ============================================ */
+.trust-strip {
+  background: var(--white);
+  padding: 28px 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 48px;
+  flex-wrap: wrap;
+  position: relative;
+}
+
+.trust-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  opacity: 0;
+  transform: translateY(15px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.trust-item.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.trust-item svg {
+  width: 22px;
+  height: 22px;
+  flex-shrink: 0;
+}
+
+.trust-item .trust-label {
+  font-weight: 500;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  color: var(--gray-700);
+}
+
+/* ============================================
+   CONSTRUCTION / VAN SCROLL SECTION
+   ============================================ */
+.construction-section {
+  position: relative;
+  margin-top: -1px;
+}
+
+.construction-frame {
+  position: relative;
+  width: 100%;
+  height: 400px;
+  overflow: hidden;
+  background: var(--white);
+}
+
+.construction-sign {
+  position: absolute;
+  bottom: 100px;
+  left: 0; right: 0;
+  z-index: 3;
+  display: flex;
+  justify-content: center;
+  white-space: nowrap;
+  pointer-events: none;
+  clip-path: inset(0 100% 0 0);
+}
+
+.sign-inner {
+  border: 3px solid var(--orange);
+  border-radius: 6px;
+  padding: 28px 52px;
+  background: rgba(255, 255, 255, 0.95);
+  transform: rotate(-1.5deg);
+  box-shadow: 4px 6px 20px rgba(0,0,0,0.1);
+  position: relative;
+}
+
+/* Small deer icon on the sign */
+.sign-inner::before {
+  content: '';
+  position: absolute;
+  top: -14px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 28px;
+  height: 28px;
+  background: var(--white);
+  border: 2px solid var(--orange);
+  border-radius: 50%;
+}
+
+.sign-inner h2 {
+  font-weight: 700;
+  font-size: clamp(32px, 5vw, 56px);
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  color: var(--orange);
+  margin: 0;
+  line-height: 1.1;
+}
+
+.sign-inner p {
+  font-weight: 400;
+  font-size: clamp(14px, 2vw, 22px);
+  text-transform: uppercase;
+  letter-spacing: 10px;
+  color: var(--gray-700);
+  margin-top: 6px;
+}
+
+.construction-ground {
+  position: absolute;
+  bottom: 0; left: 0;
+  width: 100%;
+  height: 80px;
+  z-index: 2;
+}
+
+.ground-line {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 3px;
+  background: var(--orange);
+}
+
+.ground-surface {
+  position: absolute;
+  top: 3px; left: 0;
+  width: 100%;
+  height: 77px;
+  background: linear-gradient(to bottom, #e8e8e8, #f2f2f2);
+}
+
+.van-container {
+  position: absolute;
+  bottom: 80px;
+  z-index: 5;
+  will-change: transform;
+}
+
+.van-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.van-wrapper img.van-img {
+  display: block;
+  height: 220px;
+  width: auto;
+}
+
+.van-logo-overlay {
+  position: absolute;
+  top: 22%; left: 5%;
+  width: 48%; height: 38%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.van-logo-overlay img {
+  max-width: 90%;
+  max-height: 70%;
+  object-fit: contain;
+  opacity: 0.88;
+}
+
+/* ============================================
+   CAREER SECTION — with purple particle canvas
+   ============================================ */
+.career-section {
+  position: relative;
+  padding: 120px 40px;
+  background: var(--dark);
+  color: var(--white);
+  text-align: center;
+  overflow: hidden;
+}
+
+.career-particles {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.career-section > *:not(.career-particles) {
+  position: relative;
+  z-index: 1;
+}
+
+.career-section::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 4px;
+  background: linear-gradient(90deg, var(--orange), var(--purple), var(--orange));
+  z-index: 2;
+}
+
+.career-section::after {
+  content: '';
+  position: absolute;
+  bottom: 0; right: 0;
+  width: 400px; height: 400px;
+  background: radial-gradient(circle, rgba(123, 94, 167, 0.1) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.career-badge {
+  display: inline-block;
+  border: 2px solid var(--orange);
+  border-radius: 4px;
+  padding: 10px 28px;
+  margin-bottom: 36px;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.career-badge.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.career-badge span {
+  font-weight: 600;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 5px;
+  color: var(--orange);
+}
+
+.career-section h2 {
+  font-weight: 700;
+  font-size: clamp(28px, 5vw, 52px);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  line-height: 1.15;
+  margin-bottom: 20px;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.7s ease 0.2s, transform 0.7s ease 0.2s;
+}
+
+.career-section h2.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.career-section h2 span.highlight {
+  color: var(--purple-light);
+}
+
+.career-section .subtitle {
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 300;
+  font-size: clamp(16px, 2.2vw, 22px);
+  letter-spacing: 1px;
+  color: rgba(255,255,255,0.6);
+  max-width: 700px;
+  margin: 0 auto 40px;
+  line-height: 1.6;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.7s ease 0.4s, transform 0.7s ease 0.4s;
+}
+
+.career-section .subtitle.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Value prop pillars */
+.career-pillars {
+  display: flex;
+  justify-content: center;
+  gap: 48px;
+  margin-bottom: 40px;
+  flex-wrap: wrap;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.7s ease 0.5s, transform 0.7s ease 0.5s;
+}
+
+.career-pillars.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.pillar {
+  text-align: center;
+  max-width: 180px;
+}
+
+.pillar-icon {
+  width: 36px;
+  height: 36px;
+  margin: 0 auto 12px;
+  opacity: 0.7;
+}
+
+.pillar h4 {
+  font-weight: 600;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  color: var(--purple-light);
+  margin-bottom: 6px;
+}
+
+.pillar p {
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 300;
+  font-size: 13px;
+  color: rgba(255,255,255,0.45);
+  line-height: 1.5;
+}
+
+/* Founder quote */
+.founder-quote {
+  font-family: 'DM Sans', sans-serif;
+  font-style: italic;
+  font-weight: 300;
+  font-size: 16px;
+  color: rgba(255,255,255,0.35);
+  max-width: 600px;
+  margin: 0 auto 44px;
+  line-height: 1.6;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.7s ease 0.55s, transform 0.7s ease 0.55s;
+}
+
+.founder-quote.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.career-cta {
+  display: inline-block;
+  border: 2px solid var(--orange);
+  background: transparent;
+  color: var(--white);
+  font-weight: 600;
+  font-size: 16px;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  padding: 16px 48px;
+  cursor: pointer;
+  text-decoration: none;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.7s ease 0.6s, transform 0.7s ease 0.6s, background 0.3s ease, color 0.3s ease;
+}
+
+.career-cta.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.career-cta:hover {
+  background: var(--orange);
+  color: var(--white);
+}
+
+.career-reply-note {
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 300;
+  font-size: 13px;
+  color: rgba(255,255,255,0.3);
+  margin-top: 16px;
+  letter-spacing: 0.5px;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.7s ease 0.7s, transform 0.7s ease 0.7s;
+}
+
+.career-reply-note.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ============================================
+   FOOTER
+   ============================================ */
+.footer {
+  background: #111;
+  padding: 48px 40px 36px;
+  text-align: center;
+  border-top: 3px solid var(--orange);
+}
+
+.footer-logo {
+  display: inline-block;
+  background: rgba(255,255,255,0.85);
+  border-radius: 3px;
+  padding: 4px 8px;
+  margin-bottom: 16px;
+}
+
+.footer-logo img {
+  height: 60px;
+  width: auto;
+  display: block;
+}
+
+.footer-tagline {
+  font-weight: 300;
+  font-size: 13px;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.35);
+  margin-bottom: 6px;
+}
+
+.footer-personality {
+  font-family: 'DM Sans', sans-serif;
+  font-style: italic;
+  font-weight: 300;
+  font-size: 13px;
+  letter-spacing: 1px;
+  color: rgba(255,255,255,0.2);
+  margin-bottom: 24px;
+}
+
+.footer-links {
+  display: flex;
+  justify-content: center;
+  gap: 32px;
+  list-style: none;
+  margin-bottom: 28px;
+}
+
+.footer-links a {
+  font-weight: 400;
+  font-size: 12px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.4);
+  text-decoration: none;
+  transition: color 0.25s ease;
+}
+
+.footer-links a:hover {
+  color: var(--orange);
+}
+
+.footer-copy {
+  font-weight: 300;
+  font-size: 11px;
+  letter-spacing: 2px;
+  color: rgba(255,255,255,0.2);
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+@media (max-width: 1024px) {
+  .hero-composition { width: 700px; height: 400px; }
+  .deer-layer { width: 135px; left: 105px; bottom: 100px; }
+  .wordmark-layer { left: 190px; }
+  .wordmark-layer img { width: 420px; }
+  .art-wall-wrapper { right: 20px; }
+  .art-wall { padding: 40px 28px; }
+  .art-word .letter { font-size: 42px; }
+}
+
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+  .nav-toggle { display: block; }
+  .nav-inner { padding: 0 16px; }
+  .nav-logo img { height: 120px; margin: -40px 0; }
+
+  .hero-composition { width: 100%; height: 320px; padding: 0 15px; }
+  .deer-layer { width: 100px; left: 50px; bottom: 70px; }
+  .wordmark-layer { left: 100px; }
+  .wordmark-layer img { width: 260px; }
+  .art-wall-wrapper { position: relative; right: auto; top: auto; transform: none; margin: 20px auto 0; animation: none; opacity: 1; }
+  .art-acronym { gap: 20px; }
+  .art-word .letter { font-size: 36px; }
+  .art-tagline { font-size: 16px; letter-spacing: 2px; }
+
+  .services-grid { grid-template-columns: 1fr; max-width: 400px; }
+  .services-section { padding: 60px 20px 70px; }
+
+  .trust-strip { gap: 24px; padding: 20px; }
+  .trust-item .trust-label { font-size: 10px; letter-spacing: 2px; }
+
+  .career-section { padding: 80px 20px; }
+  .career-pillars { gap: 24px; }
+  .footer-links { flex-wrap: wrap; gap: 20px; }
+  .footer-logo img { height: 50px; }
+}
+
+@media (max-width: 480px) {
+  .hero-composition { height: 280px; }
+  .deer-layer { width: 80px; left: 20px; bottom: 55px; }
+  .wordmark-layer { left: 60px; }
+  .wordmark-layer img { width: 200px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ============================================
+     NAVIGATION
+     ============================================ -->
+<nav class="nav" id="main-nav">
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">
+      <img src="DEAR AIR,_Header Logo.png" alt="Dear Air">
+    </a>
+    <ul class="nav-links">
+      <li><a href="#services-section">Services</a></li>
+      <li><a href="#career-section">Careers</a></li>
+    </ul>
+    <button class="nav-toggle" id="nav-toggle" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- ============================================
+     HERO SECTION
+     ============================================ -->
+<section class="hero" id="hero">
+  <div class="hero-composition">
+
+    <!-- LAYER 1: Deer -->
+    <div class="deer-layer">
+      <img src="DEAR AIR,_Standing Deer.png" alt="Dear Air Silver Deer">
+    </div>
+
+    <!-- LAYER 2: Animated Air Stream -->
+    <div class="air-stream-layer">
+          <svg class="air-stream-svg" viewBox="0 0 2400 520" preserveAspectRatio="none">
+            <defs>
+              <mask id="slice-mask" maskUnits="userSpaceOnUse" x="0" y="0" width="2400" height="520">
+                <rect width="2400" height="520" fill="white"/>
+              </mask>
+            </defs>
+            <g mask="url(#slice-mask)">
+              <path class="air-ribbon ribbon-5" d="M-100,390 C50,370 200,330 350,355 C500,380 570,420 720,395 C870,370 950,320 1100,345 C1250,370 1320,420 1470,395 C1620,370 1700,320 1850,345 C2000,370 2070,420 2220,395 L2400,385"/>
+              <path class="air-ribbon ribbon-3" d="M-100,400 C50,382 150,340 300,358 C450,376 520,418 670,396 C820,374 890,320 1040,342 C1190,364 1260,418 1410,390 C1560,362 1630,320 1780,342 C1930,364 2000,418 2150,390 L2400,378"/>
+              <path class="air-ribbon ribbon-1" d="M-100,358 C50,338 170,300 320,320 C470,340 540,382 690,362 C840,342 910,290 1060,312 C1210,334 1280,382 1430,360 C1580,338 1650,290 1800,312 C1950,334 2020,382 2170,360 L2400,350"/>
+              <path class="air-ribbon ribbon-2" d="M-100,430 C50,448 180,414 330,428 C480,442 550,465 700,445 C850,425 920,392 1070,412 C1220,432 1290,465 1440,442 C1590,419 1660,392 1810,412 C1960,432 2030,465 2180,442 L2400,430"/>
+              <path class="air-ribbon ribbon-4" d="M-100,375 C50,362 140,328 290,345 C440,362 510,392 660,375 C810,358 880,318 1030,338 C1180,358 1250,392 1400,372 C1550,352 1620,318 1770,338 C1920,358 1990,392 2140,372 L2400,362"/>
+              <g class="loop-group">
+                <path class="air-loop" data-loop-id="0" d="M50,362 C100,355 140,340 200,345 C260,350 320,362 380,370 C420,375 450,378 470,370 C485,358 495,340 498,322 C500,302 492,286 478,282 C462,278 448,288 444,305 C440,322 448,342 462,355 C478,368 498,375 530,380 C580,388 640,392 700,388 C760,384 820,375 880,370"/>
+                <path class="air-loop" data-loop-id="1" d="M500,396 C560,388 620,376 680,370 C740,364 800,358 860,362 C900,366 930,372 945,365 C958,354 966,336 968,318 C970,298 962,282 948,278 C932,274 918,284 916,302 C914,320 922,340 938,354 C954,368 978,376 1010,380 C1060,386 1120,390 1180,386 C1240,382 1300,374 1360,368"/>
+                <path class="air-loop" data-loop-id="2" d="M950,312 C1010,320 1060,330 1120,338 C1180,346 1230,354 1280,360 C1310,364 1335,366 1348,358 C1360,346 1368,328 1370,310 C1372,290 1364,274 1350,270 C1334,266 1320,276 1318,294 C1316,312 1324,332 1340,346 C1356,360 1378,368 1410,372 C1460,378 1520,380 1580,376 C1640,372 1700,364 1760,358"/>
+                <path class="air-loop" data-loop-id="3" d="M1350,395 C1410,388 1470,376 1530,370 C1590,364 1640,358 1690,365 C1720,370 1740,374 1752,366 C1764,354 1772,336 1774,318 C1776,298 1768,282 1754,278 C1738,274 1724,284 1722,302 C1720,320 1728,340 1744,354 C1760,368 1782,376 1814,380 C1864,386 1920,392 1980,390 C2040,388 2100,382 2160,378"/>
+              </g>
+            </g>
+          </svg>
+        </div>
+
+        <!-- LAYER 3: Wordmark -->
+        <div class="wordmark-layer">
+          <img src="DEAR AIR,_Wordmark.png" alt="Dear Air, Wordmark">
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ART wall — overlays hero, right-aligned -->
+  <div class="art-wall-wrapper">
+    <div class="art-wall">
+      <div class="art-acronym">
+        <div class="art-word">
+          <span class="letter">A</span>
+          <span class="full-word">Available</span>
+        </div>
+        <div class="art-word">
+          <span class="letter">R</span>
+          <span class="full-word">Responsive</span>
+        </div>
+        <div class="art-word">
+          <span class="letter">T</span>
+          <span class="full-word">Transparent</span>
+        </div>
+      </div>
+      <div class="art-tagline">
+        The <em>ART</em> of Dear Air<br>HVAC Solutions
+      </div>
+    </div>
+    <div class="art-sparkle">
+      <div class="stars">
+        <svg viewBox="0 0 20 20"><polygon points="10,1 12.6,7.2 19.5,7.6 14,12 15.8,18.9 10,15.4 4.2,18.9 6,12 0.5,7.6 7.4,7.2" fill="#F5C518"/></svg>
+        <svg viewBox="0 0 20 20"><polygon points="10,1 12.6,7.2 19.5,7.6 14,12 15.8,18.9 10,15.4 4.2,18.9 6,12 0.5,7.6 7.4,7.2" fill="#F5C518"/></svg>
+        <svg viewBox="0 0 20 20"><polygon points="10,1 12.6,7.2 19.5,7.6 14,12 15.8,18.9 10,15.4 4.2,18.9 6,12 0.5,7.6 7.4,7.2" fill="#F5C518"/></svg>
+        <svg viewBox="0 0 20 20"><polygon points="10,1 12.6,7.2 19.5,7.6 14,12 15.8,18.9 10,15.4 4.2,18.9 6,12 0.5,7.6 7.4,7.2" fill="#F5C518"/></svg>
+        <svg viewBox="0 0 20 20"><polygon points="10,1 12.6,7.2 19.5,7.6 14,12 15.8,18.9 10,15.4 4.2,18.9 6,12 0.5,7.6 7.4,7.2" fill="#F5C518"/></svg>
+      </div>
+      <span class="sparkle-text">"Sparkle."</span>
+    </div>
+  </div>
+
+  <!-- Scroll cue -->
+  <div class="scroll-cue" id="scroll-cue">
+    <span>Scroll</span>
+    <div class="arrow"></div>
+  </div>
+</section>
+
+<!-- Orange divider -->
+<div class="divider-line"></div>
+
+<!-- ============================================
+     SERVICES SECTION
+     ============================================ -->
+<section class="services-section" id="services-section">
+  <div class="services-header">
+    <h2>I Need&hellip;</h2>
+  </div>
+  <div class="services-grid" id="services-grid">
+    <div class="service-card card-cooling" data-delay="0">
+      <svg class="card-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--purple);">
+        <path d="M24 4v40M4 24h40M10 10l28 28M38 10L10 38"/>
+        <path d="M24 4l-4 6h8l-4-6M24 44l-4-6h8l-4 6M4 24l6-4v8l-6-4M44 24l-6-4v8l6-4"/>
+      </svg>
+      <h3>Cooling</h3>
+      <p>Precision climate control, engineered for comfort. Central air, ductless splits, and next-gen systems installed with obsessive attention to airflow.</p>
+    </div>
+    <div class="service-card card-heating" data-delay="150">
+      <svg class="card-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" style="color: var(--orange);">
+        <path d="M14 36c-4-4-6-9-6-14 0-10 8-18 16-18 2 6-2 10-2 14s4 8 4 12c0 4-2 7-6 8"/>
+        <path d="M24 44c-2 0-4-2-4-4 0-3 2-5 4-8 2 3 4 5 4 8 0 2-2 4-4 4"/>
+      </svg>
+      <h3>Heating</h3>
+      <p>Warmth, delivered intelligently. Furnaces, heat pumps, and radiant systems sized to your space and tuned to peak efficiency.</p>
+    </div>
+    <div class="service-card card-maintenance" data-delay="300">
+      <svg class="card-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="color: var(--orange-light);">
+        <path d="M18 6l-2 8-8 2 6 6-2 8 8-4 8 4-2-8 6-6-8-2-2-8z"/>
+        <circle cx="20" cy="20" r="4"/>
+        <path d="M30 30l12 12M38 34l4 4"/>
+      </svg>
+      <h3>Maintenance</h3>
+      <p>Proactive care for every component. Seasonal tune-ups, filter programs, and diagnostics that catch problems before they knock.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Gradient divider -->
+<div class="divider-gradient"></div>
+
+<!-- ============================================
+     TRUST STRIP
+     ============================================ -->
+<div class="trust-strip" id="trust-strip">
+  <div class="trust-item" data-delay="0">
+    <svg viewBox="0 0 24 24" fill="none" stroke="var(--orange)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+      <path d="M9 12l2 2 4-4"/>
+    </svg>
+    <span class="trust-label">Licensed &amp; Insured</span>
+  </div>
+  <div class="trust-item" data-delay="100">
+    <svg viewBox="0 0 24 24" fill="none" stroke="var(--purple)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/>
+      <circle cx="12" cy="10" r="3"/>
+    </svg>
+    <span class="trust-label">Northern NJ</span>
+  </div>
+  <div class="trust-item" data-delay="200">
+    <svg viewBox="0 0 24 24" fill="none" stroke="var(--orange)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="12" r="10"/>
+      <path d="M12 6v6l4 2"/>
+    </svg>
+    <span class="trust-label">24/7 Emergency Service</span>
+  </div>
+  <div class="trust-item" data-delay="300">
+    <svg viewBox="0 0 24 24" fill="none" stroke="var(--purple)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M22 11.08V12a10 10 0 11-5.93-9.14"/>
+      <path d="M22 4L12 14.01l-3-3"/>
+    </svg>
+    <span class="trust-label">Satisfaction Guaranteed</span>
+  </div>
+</div>
+
+<!-- ============================================
+     CONSTRUCTION / VAN SCROLL SECTION
+     ============================================ -->
+<section class="construction-section" id="construction-section">
+  <div class="construction-frame" id="construction-frame">
+
+    <!-- Sign (revealed by van) -->
+    <div class="construction-sign" id="construction-sign">
+      <div class="sign-inner">
+        <h2>Coming Soon</h2>
+        <p>to your area</p>
+      </div>
+    </div>
+
+    <!-- Ground / road -->
+    <div class="construction-ground">
+      <div class="ground-line"></div>
+      <div class="ground-surface"></div>
+    </div>
+
+    <!-- Van -->
+    <div class="van-container" id="van-container">
+      <div class="van-wrapper">
+        <img class="van-img" id="van-img"
+             src="sprinter-van.png"
+             alt="Dear Air Sprinter Van">
+        <div class="van-logo-overlay">
+          <img src="header-logo-cropped.png" alt="Dear Air Logo">
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- Purple divider before careers -->
+<div class="divider-purple"></div>
+
+<!-- ============================================
+     CAREER SECTION
+     ============================================ -->
+<section class="career-section" id="career-section">
+  <canvas class="career-particles" id="career-particles"></canvas>
+  <div class="career-badge" id="career-badge">
+    <span>Now Recruiting</span>
+  </div>
+  <h2 id="career-heading">Love <span class="highlight">air</span>?<br>Have HVAC skills?</h2>
+  <p class="subtitle" id="career-subtitle">We're looking for HVAC professionals who see this trade as a craft — not just a job. If you prioritize quality, reputation, and take pride in delivering clean, comfortable air to customers, we should connect. Leave the status quo behind.</p>
+
+  <!-- Value prop pillars -->
+  <div class="career-pillars" id="career-pillars">
+    <div class="pillar">
+      <svg class="pillar-icon" viewBox="0 0 36 36" fill="none" stroke="var(--purple-light)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M18 6v6M18 24v6M6 18h6M24 18h6"/>
+        <circle cx="18" cy="18" r="7"/>
+        <path d="M13 18h4l2-3 2 6 2-3h4"/>
+      </svg>
+      <h4>Alignment Through Ownership</h4>
+      <p>Profit sharing opportunities available for all employees.</p>
+    </div>
+    <div class="pillar">
+      <svg class="pillar-icon" viewBox="0 0 36 36" fill="none" stroke="var(--purple-light)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="3" y="14" width="30" height="18" rx="2"/>
+        <path d="M8 14V8a10 10 0 0120 0v6"/>
+        <circle cx="18" cy="24" r="3"/>
+        <path d="M18 27v2"/>
+      </svg>
+      <h4>Tech-Forward Workflow</h4>
+      <p>Smart diagnostics. Modern equipment. Real tools.</p>
+    </div>
+    <div class="pillar">
+      <svg class="pillar-icon" viewBox="0 0 36 36" fill="none" stroke="var(--purple-light)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M18 3l4 8 9 1.3-6.5 6.3 1.5 9L18 23.5 9.5 27.6l1.5-9L4.5 12.3l9-1.3z"/>
+      </svg>
+      <h4>Respect for the Craft</h4>
+      <p>Technicians are the backbone. We build around you.</p>
+    </div>
+    <div class="pillar">
+      <svg class="pillar-icon" viewBox="0 0 36 36" fill="none" stroke="var(--purple-light)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M4 28L18 4l14 24H4z"/>
+        <path d="M18 12v8M18 24h.01"/>
+      </svg>
+      <h4>Growth from Day One</h4>
+      <p>Certifications. Career paths. No ceiling.</p>
+    </div>
+  </div>
+
+  <!-- Founder quote -->
+  <p class="founder-quote" id="founder-quote">"We believe HVAC solutions shouldn't be an afterthought – your comfort is important and your air is too dear! So we put it in our name."</p>
+
+  <a href="mailto:info@dear-air.com?subject=Career%20Inquiry%20%E2%80%93%20Dear%20Air" class="career-cta" id="career-cta">Let's Talk Air</a>
+  <p class="career-reply-note" id="career-reply-note">Tell us about yourself. We reply to every message.</p>
+</section>
+
+<!-- ============================================
+     FOOTER
+     ============================================ -->
+<footer class="footer">
+  <div class="footer-logo">
+    <img src="DEAR AIR,_Wordmark.png" alt="Dear Air">
+  </div>
+  <div class="footer-tagline">Coming to Northern New Jersey</div>
+  <div class="footer-personality">Your air is precious! It's in the name.</div>
+  <ul class="footer-links">
+    <li><a href="#hero">Home</a></li>
+    <li><a href="#services-section">Services</a></li>
+    <li><a href="#career-section">Careers</a></li>
+  </ul>
+  <div class="footer-copy">&copy; 2026 Dear Air. All rights reserved.</div>
+</footer>
+
+<!-- ============================================
+     SCRIPTS
+     ============================================ -->
+<script>
+(function() {
+  'use strict';
+
+  // ============================================
+  // NAV SCROLL EFFECT
+  // ============================================
+  const nav = document.getElementById('main-nav');
+  const scrollCue = document.getElementById('scroll-cue');
+
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 60) {
+      nav.classList.add('scrolled');
+    } else {
+      nav.classList.remove('scrolled');
+    }
+    if (scrollCue) {
+      scrollCue.style.opacity = Math.max(0, 1 - window.scrollY / 200);
+    }
+  }, { passive: true });
+
+  // ============================================
+  // INTERSECTION OBSERVER (scroll reveals)
+  // ============================================
+  const revealElements = [
+    document.getElementById('career-badge'),
+    document.getElementById('career-heading'),
+    document.getElementById('career-subtitle'),
+    document.getElementById('career-pillars'),
+    document.getElementById('founder-quote'),
+    document.getElementById('career-cta'),
+    document.getElementById('career-reply-note'),
+  ];
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.3 });
+
+  revealElements.forEach(el => {
+    if (el) observer.observe(el);
+  });
+
+  // Service cards with staggered delay
+  document.querySelectorAll('.service-card').forEach((card) => {
+    const cardObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          setTimeout(() => {
+            entry.target.classList.add('visible');
+          }, parseInt(entry.target.dataset.delay) || 0);
+          cardObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.2 });
+    cardObserver.observe(card);
+  });
+
+  // Trust strip items with staggered delay
+  document.querySelectorAll('.trust-item').forEach((item) => {
+    const trustObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          setTimeout(() => {
+            entry.target.classList.add('visible');
+          }, parseInt(entry.target.dataset.delay) || 0);
+          trustObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.3 });
+    trustObserver.observe(item);
+  });
+
+
+  // ============================================
+  // HERO: RIBBON FLOW ANIMATION
+  // ============================================
+  const ribbons = document.querySelectorAll('.air-ribbon');
+  const pathLengths = [];
+  const baseSpeed = [1.8, 1.5, 2.1, 1.35, 1.7];
+  const ribbonState = [];
+
+  ribbons.forEach((ribbon, i) => {
+    const len = ribbon.getTotalLength();
+    pathLengths.push(len);
+    const dashLen = len * 0.45;
+    const gapLen = len * 0.55;
+    ribbon.style.strokeDasharray = `${dashLen} ${gapLen}`;
+    ribbon.style.strokeDashoffset = len;
+
+    ribbonState.push({
+      speed: baseSpeed[i],
+      gustStrength: 0, gustTarget: 0,
+      nextGust: 40 + Math.random() * 160,
+      gustTimer: Math.random() * 80,
+      freqA: 0.001 + Math.random() * 0.002,
+      freqB: 0.003 + Math.random() * 0.003,
+      freqC: 0.0004 + Math.random() * 0.0008,
+      phaseA: Math.random() * Math.PI * 2,
+      phaseB: Math.random() * Math.PI * 2,
+      phaseC: Math.random() * Math.PI * 2,
+      ampA: 0.15 + Math.random() * 0.2,
+      ampB: 0.08 + Math.random() * 0.12,
+      ampC: 0.25 + Math.random() * 0.2,
+      swirlActive: false, swirlTimer: 0, swirlDuration: 0,
+      nextSwirl: 300 + Math.random() * 600,
+      swirlCooldown: 0,
+    });
+  });
+
+  let time = 0;
+  let lastTimestamp = null;
+  let globalGust = 0;
+  let globalGustTarget = 0;
+  let globalGustTimer = 0;
+  let nextGlobalGust = 100 + Math.random() * 180;
+
+  function animateStream(timestamp) {
+    if (!lastTimestamp) lastTimestamp = timestamp;
+    const dt = (timestamp - lastTimestamp) / 16.67;
+    lastTimestamp = timestamp;
+    time += dt;
+
+    globalGustTimer += dt;
+    if (globalGustTimer >= nextGlobalGust) {
+      globalGustTarget = 0.5 + Math.random() * 1.5;
+      globalGustTimer = 0;
+      nextGlobalGust = 90 + Math.random() * 250;
+    }
+    if (globalGust < globalGustTarget) {
+      globalGust += (globalGustTarget - globalGust) * 0.06;
+    } else {
+      globalGust *= 0.98;
+    }
+
+    ribbons.forEach((ribbon, i) => {
+      const len = pathLengths[i];
+      const st = ribbonState[i];
+
+      st.gustTimer += dt;
+      if (st.gustTimer >= st.nextGust) {
+        st.gustTarget = 0.3 + Math.random() * 0.9;
+        st.gustTimer = 0;
+        st.nextGust = 50 + Math.random() * 180;
+      }
+      if (st.gustStrength < st.gustTarget) {
+        st.gustStrength += (st.gustTarget - st.gustStrength) * 0.1;
+      } else {
+        st.gustStrength *= 0.99;
+      }
+
+      const noiseA = st.ampA * Math.sin(time * st.freqA + st.phaseA);
+      const noiseB = st.ampB * Math.sin(time * st.freqB + st.phaseB);
+      const noiseC = st.ampC * Math.sin(time * st.freqC + st.phaseC);
+      const noise = 1 + noiseA + noiseB + noiseC;
+
+      st.swirlCooldown -= dt;
+      if (!st.swirlActive && st.swirlCooldown <= 0) {
+        st.nextSwirl -= dt;
+        if (st.nextSwirl <= 0) {
+          st.swirlActive = true;
+          st.swirlTimer = 0;
+          st.swirlDuration = 15 + Math.random() * 25;
+          st.nextSwirl = 400 + Math.random() * 800;
+        }
+      }
+
+      let swirlMod = 1;
+      if (st.swirlActive) {
+        st.swirlTimer += dt;
+        const t = st.swirlTimer / st.swirlDuration;
+        if (t < 0.3) swirlMod = 1 - (t / 0.3) * 1.5;
+        else if (t < 0.5) swirlMod = -0.5 + ((t - 0.3) / 0.2) * 1.0;
+        else if (t < 0.8) swirlMod = 0.5 + ((t - 0.5) / 0.3) * 2.0;
+        else swirlMod = 2.5 - ((t - 0.8) / 0.2) * 1.5;
+        if (st.swirlTimer >= st.swirlDuration) {
+          st.swirlActive = false;
+          st.swirlCooldown = 100 + Math.random() * 200;
+        }
+      }
+
+      const speedMod = noise * (1 + st.gustStrength + globalGust * 0.5) * swirlMod;
+      const currentOffset = parseFloat(ribbon.style.strokeDashoffset);
+      let newOffset = currentOffset - st.speed * speedMod * dt;
+      const total = len * 1.0;
+      if (newOffset <= -total) newOffset += total;
+      if (newOffset > len) newOffset -= total;
+      ribbon.style.strokeDashoffset = newOffset;
+
+      const absSpeed = Math.abs(speedMod);
+      ribbon.style.opacity = Math.min(1, 0.85 + Math.min(absSpeed * 0.15, 0.5));
+    });
+
+    updateSlices(timestamp);
+    requestAnimationFrame(animateStream);
+  }
+  requestAnimationFrame(animateStream);
+
+  // ============================================
+  // HERO: LOOP SYSTEM
+  // ============================================
+  const loops = document.querySelectorAll('.air-loop');
+  const loopState = [];
+
+  loops.forEach((loop) => {
+    const len = loop.getTotalLength();
+    loop.style.strokeDasharray = len;
+    loop.style.strokeDashoffset = len;
+    loopState.push({
+      length: len, active: false, phase: 'idle', progress: 0,
+      nextTrigger: 200 + Math.random() * 500,
+      timer: Math.random() * 100, drawSpeed: 0,
+    });
+  });
+
+  function animateLoops() {
+    loopState.forEach((st, i) => {
+      const loop = loops[i];
+      if (st.phase === 'idle') {
+        st.timer++;
+        if (st.timer >= st.nextTrigger) {
+          st.phase = 'drawing'; st.progress = 0;
+          st.drawSpeed = 0.012 + Math.random() * 0.01;
+          loop.style.opacity = 0;
+        }
+        return;
+      }
+      if (st.phase === 'drawing') {
+        st.progress += st.drawSpeed;
+        const eased = st.progress < 0.5
+          ? 2 * st.progress * st.progress
+          : 1 - Math.pow(-2 * st.progress + 2, 2) / 2;
+        loop.style.strokeDashoffset = st.length * (1 - eased);
+        loop.style.opacity = Math.min(eased * 2, 1) * 0.7;
+        if (st.progress >= 1) { st.phase = 'hold'; st.progress = 0; }
+        return;
+      }
+      if (st.phase === 'hold') {
+        st.progress += 0.03;
+        if (st.progress >= 1) { st.phase = 'fading'; st.progress = 0; }
+        return;
+      }
+      if (st.phase === 'fading') {
+        st.progress += 0.02;
+        loop.style.opacity = Math.max(0, 0.7 * (1 - st.progress));
+        if (st.progress >= 1) {
+          st.phase = 'idle'; st.timer = 0;
+          st.nextTrigger = 300 + Math.random() * 700;
+          loop.style.strokeDashoffset = st.length;
+          loop.style.opacity = 0;
+        }
+      }
+    });
+    requestAnimationFrame(animateLoops);
+  }
+  requestAnimationFrame(animateLoops);
+
+  // ============================================
+  // HERO: MOUSE SLICE SYSTEM
+  // ============================================
+  const svgEl = document.querySelector('.air-stream-svg');
+  const maskEl = document.getElementById('slice-mask');
+  const sliceHoles = [];
+  const SLICE_RADIUS = 40;
+  const FILL_DURATION = 1200;
+  const HOLE_SPACING = 25;
+  let currentWindSpeed = 2.0;
+  let lastMouseX = -9999, lastMouseY = -9999;
+
+  function pageToSVG(pageX, pageY) {
+    const pt = svgEl.createSVGPoint();
+    pt.x = pageX; pt.y = pageY;
+    return pt.matrixTransform(svgEl.getScreenCTM().inverse());
+  }
+
+  function createSliceHole(x, y, now) {
+    const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+    circle.setAttribute('cx', x); circle.setAttribute('cy', y);
+    circle.setAttribute('r', SLICE_RADIUS); circle.setAttribute('fill', 'black');
+    maskEl.appendChild(circle);
+    sliceHoles.push({ element: circle, createdAt: now, x, y, windSpeed: currentWindSpeed });
+  }
+
+  const heroEl = document.querySelector('.hero');
+  heroEl.addEventListener('mousemove', (e) => {
+    const now = performance.now();
+    const svgPt = pageToSVG(e.clientX, e.clientY);
+    if (svgPt.y < 250 || svgPt.y > 480) {
+      lastMouseX = svgPt.x; lastMouseY = svgPt.y; return;
+    }
+    const dx = svgPt.x - lastMouseX, dy = svgPt.y - lastMouseY;
+    const dist = Math.sqrt(dx * dx + dy * dy);
+    if (dist < 10) { lastMouseX = svgPt.x; lastMouseY = svgPt.y; return; }
+
+    const steps = Math.max(1, Math.ceil(dist / HOLE_SPACING));
+    for (let s = 1; s <= steps; s++) {
+      const t = s / steps;
+      const ix = lastMouseX + dx * t, iy = lastMouseY + dy * t;
+      if (iy >= 250 && iy <= 480) createSliceHole(ix, iy, now);
+    }
+    lastMouseX = svgPt.x; lastMouseY = svgPt.y;
+  });
+
+  function updateSlices() {
+    const now = performance.now();
+    let totalSpeed = 0;
+    ribbonState.forEach((st) => {
+      const noiseA = st.ampA * Math.sin(time * st.freqA + st.phaseA);
+      const noiseB = st.ampB * Math.sin(time * st.freqB + st.phaseB);
+      const noiseC = st.ampC * Math.sin(time * st.freqC + st.phaseC);
+      const noise = 1 + noiseA + noiseB + noiseC;
+      totalSpeed += st.speed * noise * (1 + st.gustStrength + globalGust * 0.5);
+    });
+    currentWindSpeed = (totalSpeed / ribbonState.length) * 1.8;
+
+    for (let i = sliceHoles.length - 1; i >= 0; i--) {
+      const hole = sliceHoles[i];
+      const age = now - hole.createdAt;
+      if (age >= FILL_DURATION) { hole.element.remove(); sliceHoles.splice(i, 1); continue; }
+      hole.x += hole.windSpeed * 0.6;
+      hole.windSpeed += (currentWindSpeed - hole.windSpeed) * 0.05;
+      hole.element.setAttribute('cx', hole.x);
+      const progress = age / FILL_DURATION;
+      let shrinkProgress = progress < 0.3 ? 0 : Math.pow((progress - 0.3) / 0.7, 2);
+      hole.element.setAttribute('r', Math.max(0, SLICE_RADIUS * (1 - shrinkProgress)));
+      const gv = Math.floor(shrinkProgress * 255);
+      hole.element.setAttribute('fill', `rgb(${gv},${gv},${gv})`);
+    }
+  }
+
+
+  // ============================================
+  // VAN SCROLL ANIMATION
+  // ============================================
+  const constructionFrame = document.getElementById('construction-frame');
+  const vanContainer = document.getElementById('van-container');
+  const sign = document.getElementById('construction-sign');
+  const vanImg = document.getElementById('van-img');
+  const VAN_HEIGHT = 220;
+
+  function getVanWidth() {
+    if (vanImg && vanImg.naturalWidth > 0) {
+      return Math.round(VAN_HEIGHT * (vanImg.naturalWidth / vanImg.naturalHeight));
+    }
+    return 509;
+  }
+
+  function updateVan() {
+    const frameRect = constructionFrame.getBoundingClientRect();
+    const viewHeight = window.innerHeight;
+    const frameHeight = constructionFrame.offsetHeight;
+
+    const entryPoint = viewHeight - frameHeight;
+    const completePoint = viewHeight * 0.4;
+    const currentPos = frameRect.top;
+
+    const rawT = (entryPoint - currentPos) / (entryPoint - completePoint);
+    const t = Math.max(0, Math.min(1, rawT));
+
+    const frameWidth = constructionFrame.offsetWidth;
+    const vanWidth = getVanWidth();
+    const startX = -vanWidth * 0.55;
+    const parkX = frameWidth - vanWidth * 0.55;
+    const eased = 1 - Math.pow(1 - t, 2.5);
+    const x = startX + eased * (parkX - startX);
+
+    vanContainer.style.transform = `translateX(${x}px)`;
+
+    if (t > 0.03 && t < 0.95) {
+      const vibTime = performance.now();
+      const bounce = Math.sin(vibTime * 0.02) * 0.4 + Math.sin(vibTime * 0.033) * 0.25;
+      vanContainer.style.marginBottom = bounce + 'px';
+    } else {
+      vanContainer.style.marginBottom = '0px';
+    }
+
+    const vanLeft = x;
+    const clipRight = Math.max(0, frameWidth - vanLeft);
+    sign.style.clipPath = `inset(0 ${clipRight}px 0 0)`;
+
+    requestAnimationFrame(updateVan);
+  }
+
+  vanContainer.style.transform = `translateX(${-getVanWidth() * 0.55}px)`;
+  requestAnimationFrame(updateVan);
+
+  // ============================================
+  // CAREER: PURPLE PARTICLE / AIRFLOW ANIMATION
+  // ============================================
+  const particleCanvas = document.getElementById('career-particles');
+  if (particleCanvas) {
+    const ctx = particleCanvas.getContext('2d');
+    let particles = [];
+    const PARTICLE_COUNT = 50;
+
+    function resizeCanvas() {
+      const section = particleCanvas.parentElement;
+      particleCanvas.width = section.offsetWidth;
+      particleCanvas.height = section.offsetHeight;
+    }
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+
+    for (let i = 0; i < PARTICLE_COUNT; i++) {
+      particles.push({
+        x: Math.random() * particleCanvas.width,
+        y: Math.random() * particleCanvas.height,
+        vx: 0.15 + Math.random() * 0.4,
+        vy: (Math.random() - 0.5) * 0.3,
+        radius: 1 + Math.random() * 2,
+        alpha: 0.05 + Math.random() * 0.12,
+        phase: Math.random() * Math.PI * 2,
+      });
+    }
+
+    function animateParticles() {
+      ctx.clearRect(0, 0, particleCanvas.width, particleCanvas.height);
+      particles.forEach(p => {
+        p.x += p.vx;
+        p.y += p.vy + Math.sin(p.phase + p.x * 0.005) * 0.15;
+        p.phase += 0.01;
+
+        if (p.x > particleCanvas.width + 10) {
+          p.x = -10;
+          p.y = Math.random() * particleCanvas.height;
+        }
+
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(123, 94, 167, ${p.alpha})`;
+        ctx.fill();
+      });
+      requestAnimationFrame(animateParticles);
+    }
+
+    // Only animate when section is visible
+    const careerSection = document.getElementById('career-section');
+    const particleObserver = new IntersectionObserver((entries) => {
+      if (entries[0].isIntersecting) {
+        animateParticles();
+        particleObserver.unobserve(careerSection);
+      }
+    }, { threshold: 0.1 });
+    particleObserver.observe(careerSection);
+  }
+
+})();
+</script>
+
+</body>
+</html>
