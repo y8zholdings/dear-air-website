@@ -1042,10 +1042,12 @@ h1, h2, h3, h4, h5, h6,
 
 /* Tablet */
 @media (max-width: 1024px) {
+  /* Reduce hero height so content sits higher, less whitespace */
+  .hero { height: auto; min-height: auto; padding: 80px 20px 40px; }
   /* Let hero scale naturally — match desktop layout proportionally */
   .hero-composition { width: 95vw; max-width: 950px; height: 520px; }
-  /* Widen ribbons to match desktop wave proportions */
-  .air-stream-svg { width: 300%; left: -100%; }
+  /* Widen ribbons to match desktop wave proportions, shift up */
+  .air-stream-svg { width: 450%; left: -175%; top: -20%; }
 }
 
 /* Mobile */
