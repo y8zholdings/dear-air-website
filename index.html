@@ -1133,12 +1133,15 @@ h1, h2, h3, h4, h5, h6,
   .art-word .full-word { font-size: 10px; letter-spacing: 2.5px; }
   .art-tagline { font-size: 14px; letter-spacing: 2.5px; }
 
-  /* Air ribbons — subtle behind content */
+  /* Air ribbons — subtle behind content, shifted up on mobile */
   .air-stream-layer {
     position: absolute;
     opacity: 0.3;
     animation: none;
     z-index: 0;
+  }
+  .air-stream-svg {
+    top: -35%;
   }
 
   /* Sparkle */
