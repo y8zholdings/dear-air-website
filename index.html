@@ -1093,25 +1093,28 @@ h1, h2, h3, h4, h5, h6,
 
   /* Deer + ART wall side by side */
   .hero-middle-row {
+    position: relative !important;
+    top: auto; left: auto;
+    width: auto;
+    height: auto;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 12px;
-    width: 100%;
+    gap: 10px;
     margin-bottom: 12px;
   }
 
   .deer-layer {
     position: relative;
     bottom: auto; left: auto;
-    width: 85px;
+    width: 80px;
     flex-shrink: 0;
     opacity: 1;
     animation: none;
     z-index: 1;
   }
 
-  /* ART wall — sits right of deer */
+  /* ART wall — compact, sits right of deer */
   .art-wall-wrapper {
     position: relative;
     right: auto; top: auto;
@@ -1119,13 +1122,13 @@ h1, h2, h3, h4, h5, h6,
     opacity: 1;
     animation: none;
     flex-shrink: 1;
-    max-width: 58vw;
+    max-width: 48vw;
   }
-  .art-wall { padding: 20px 16px; }
-  .art-acronym { gap: 10px; }
-  .art-word .letter { font-size: 22px; }
-  .art-word .meaning { font-size: 7px; letter-spacing: 2px; }
-  .art-tagline { font-size: 11px; letter-spacing: 1px; }
+  .art-wall { padding: 16px 12px; }
+  .art-acronym { gap: 8px; }
+  .art-word .letter { font-size: 20px; }
+  .art-word .meaning { font-size: 6px; letter-spacing: 1.5px; }
+  .art-tagline { font-size: 10px; letter-spacing: 1px; }
 
   /* Air ribbons — subtle behind content */
   .air-stream-layer {
@@ -1168,19 +1171,22 @@ h1, h2, h3, h4, h5, h6,
   .trust-item { justify-content: center; }
   .trust-item .trust-label { font-size: 10px; letter-spacing: 2px; }
 
-  /* Van section — smaller, sign fully visible */
-  .construction-frame { height: 240px; }
-  .van-wrapper img.van-img { height: 130px; }
+  /* Van section — van above sign, parks right */
+  .construction-frame { height: 260px; }
+  .van-container { z-index: 10; }
+  .van-wrapper img.van-img { height: 120px; }
   .construction-sign {
-    bottom: 70px;
+    bottom: 30px;
     clip-path: none !important;
     opacity: 1;
     white-space: normal;
+    z-index: 3;
   }
   .sign-inner {
     padding: 14px 20px;
     white-space: normal;
     text-align: center;
+    transform: rotate(0deg);
   }
   .sign-inner h2 { font-size: 22px; letter-spacing: 2px; }
   .sign-inner p { font-size: 11px; letter-spacing: 4px; }
@@ -1226,15 +1232,16 @@ h1, h2, h3, h4, h5, h6,
 @media (max-width: 480px) {
   .hero { padding: 80px 16px 32px; }
   .hero { padding: 80px 12px 32px; }
-  .deer-layer { width: 70px; }
+  .deer-layer { width: 65px; }
   .wordmark-layer img { width: 55vw; max-width: 200px; }
-  .art-wall { padding: 18px 12px; }
-  .art-word .letter { font-size: 20px; }
+  .art-wall-wrapper { max-width: 52vw; }
+  .art-wall { padding: 14px 10px; }
+  .art-word .letter { font-size: 18px; }
   .art-word .meaning { font-size: 6px; }
-  .art-tagline { font-size: 10px; letter-spacing: 1px; }
+  .art-tagline { font-size: 9px; letter-spacing: 1px; }
   .art-sparkle .stars svg { width: 16px; height: 16px; }
   .art-sparkle .sparkle-text { font-size: 12px; }
-  .hero-middle-row { gap: 8px; }
+  .hero-middle-row { gap: 6px; }
 
   .services-header h2 { font-size: 24px; }
 
@@ -1942,16 +1949,18 @@ h1, h2, h3, h4, h5, h6,
     }
 
     const vanLeft = x;
-    // Disable clip-path sign reveal on mobile — show sign fully
-    if (window.innerWidth > 768) {
+    // On mobile: van animates but parks fully right, sign always visible
+    if (window.innerWidth <= 768) {
+      sign.style.clipPath = 'none';
+      // Override park position to right edge
+      const mobileVanWidth = vanImg.offsetWidth || 200;
+      const mobileEndX = frameWidth - mobileVanWidth * 0.35;
+      const mobileEased = 1 - Math.pow(1 - t, 2.5);
+      const mobileX = startX + mobileEased * (mobileEndX - startX);
+      vanContainer.style.transform = `translateX(${mobileX}px)`;
+    } else {
       const clipRight = Math.max(0, frameWidth - vanLeft);
       sign.style.clipPath = `inset(0 ${clipRight}px 0 0)`;
-    } else {
-      sign.style.clipPath = 'none';
-      // Park van fully right on mobile
-      const mobileVanWidth = vanImg.offsetWidth || 200;
-      vanContainer.style.transform = `translateX(${frameWidth - mobileVanWidth + 20}px)`;
-      return; // Skip desktop van animation on mobile
     }
 
     requestAnimationFrame(updateVan);
