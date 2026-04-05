@@ -193,10 +193,10 @@ h1, h2, h3, h4, h5, h6,
 /* Deer — staggered load: 0.5s */
 .deer-layer {
   position: absolute;
-  bottom: 120px;
-  left: -60px;
+  bottom: 110px;
+  left: 5px;
   z-index: 1;
-  width: 155px;
+  width: 95px;
   height: auto;
   opacity: 0;
   animation: deerReveal 1s ease-out 0.5s forwards;
@@ -1043,7 +1043,7 @@ h1, h2, h3, h4, h5, h6,
 /* Tablet */
 @media (max-width: 1024px) {
   .hero-composition { width: 700px; height: 400px; }
-  .deer-layer { width: 120px; left: 105px; bottom: 100px; }
+  .deer-layer { width: 80px; left: 100px; bottom: 85px; }
   .wordmark-layer { left: 165px; }
   .wordmark-layer img { width: 360px; }
   .art-wall-wrapper { right: 10px; }
@@ -1091,12 +1091,12 @@ h1, h2, h3, h4, h5, h6,
   }
   .wordmark-layer img { width: 55vw; max-width: 220px; }
 
-  /* Deer — positioned to the left of wordmark */
+  /* Deer — positioned to the left of wordmark, aligned with AIR */
   .deer-layer {
     position: absolute !important;
     bottom: auto !important;
     left: calc(50% - 155px) !important;
-    top: 30px;
+    top: 60px;
     right: auto !important;
     width: 65px;
     opacity: 1;
@@ -1127,11 +1127,11 @@ h1, h2, h3, h4, h5, h6,
     max-width: 72vw;
     width: 72vw;
   }
-  .art-wall { padding: 18px 16px; overflow: hidden; }
-  .art-acronym { gap: 14px; }
-  .art-word .letter { font-size: 22px; }
-  .art-word .full-word { font-size: 7px; letter-spacing: 1.5px; }
-  .art-tagline { font-size: 10px; letter-spacing: 2px; }
+  .art-wall { padding: 20px 18px; overflow: hidden; }
+  .art-acronym { gap: 18px; margin-bottom: 16px; }
+  .art-word .letter { font-size: 30px; }
+  .art-word .full-word { font-size: 8px; letter-spacing: 2px; }
+  .art-tagline { font-size: 12px; letter-spacing: 2px; }
 
   /* Air ribbons — subtle behind content */
   .air-stream-layer {
@@ -1234,13 +1234,13 @@ h1, h2, h3, h4, h5, h6,
 /* Small phones */
 @media (max-width: 480px) {
   .hero { padding: 80px 12px 32px; }
-  .deer-layer { width: 50px; left: calc(50% - 130px) !important; top: 35px; }
+  .deer-layer { width: 50px; left: calc(50% - 125px) !important; top: 55px; }
   .wordmark-layer img { width: 50vw; max-width: 190px; }
   .art-wall-wrapper { max-width: 80vw; width: 80vw; }
   .art-wall { padding: 14px 10px; }
-  .art-word .letter { font-size: 18px; }
-  .art-word .full-word { font-size: 6px; letter-spacing: 1px; }
-  .art-tagline { font-size: 9px; letter-spacing: 1px; }
+  .art-word .letter { font-size: 24px; }
+  .art-word .full-word { font-size: 7px; letter-spacing: 1.5px; }
+  .art-tagline { font-size: 10px; letter-spacing: 1.5px; }
   .art-sparkle .stars svg { width: 16px; height: 16px; }
   .art-sparkle .sparkle-text { font-size: 12px; }
 
