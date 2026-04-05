@@ -1042,13 +1042,8 @@ h1, h2, h3, h4, h5, h6,
 
 /* Tablet */
 @media (max-width: 1024px) {
-  .hero-composition { width: 700px; height: 400px; }
-  .deer-layer { width: 100px; left: 70px; bottom: 140px; }
-  .wordmark-layer { left: 165px; }
-  .wordmark-layer img { width: 360px; }
-  .art-wall-wrapper { right: 10px; }
-  .art-wall { padding: 36px 24px; }
-  .art-word .letter { font-size: 38px; }
+  /* Let hero scale naturally — match desktop layout proportionally */
+  .hero-composition { width: 95vw; max-width: 950px; height: 520px; }
 }
 
 /* Mobile */
