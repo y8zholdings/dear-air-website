@@ -182,6 +182,14 @@ h1, h2, h3, h4, h5, h6,
   isolation: isolate;
 }
 
+/* Hero middle row — transparent wrapper on desktop, flex row on mobile */
+.hero-middle-row {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+}
+
 /* Deer — staggered load: 0.5s */
 .deer-layer {
   position: absolute;
@@ -1069,54 +1077,68 @@ h1, h2, h3, h4, h5, h6,
     overflow: visible;
   }
 
-  /* Deer — small, centered above wordmark */
-  .deer-layer {
-    position: relative;
-    bottom: auto; left: auto;
-    width: 80px;
-    opacity: 1;
-    animation: none;
-    margin-bottom: 12px;
-    z-index: 1;
-  }
-
-  /* Wordmark — centered, constrained to viewport */
+  /* Wordmark — on top, centered */
   .wordmark-layer {
     position: relative;
     top: auto; left: auto;
     transform: none;
     opacity: 1;
     animation: none;
-    z-index: 2;
-    margin-bottom: 24px;
+    z-index: 20;
+    margin-bottom: 16px;
     max-width: 100%;
     text-align: center;
   }
-  .wordmark-layer img { width: 70vw; max-width: 280px; }
+  .wordmark-layer img { width: 65vw; max-width: 260px; }
 
-  /* Air ribbons — hide on mobile for cleaner look */
-  .air-stream-layer { display: none; }
+  /* Deer + ART wall side by side */
+  .hero-middle-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    width: 100%;
+    margin-bottom: 12px;
+  }
 
-  /* ART wall — center below wordmark, constrained */
+  .deer-layer {
+    position: relative;
+    bottom: auto; left: auto;
+    width: 85px;
+    flex-shrink: 0;
+    opacity: 1;
+    animation: none;
+    z-index: 1;
+  }
+
+  /* ART wall — sits right of deer */
   .art-wall-wrapper {
     position: relative;
     right: auto; top: auto;
     transform: none;
     opacity: 1;
     animation: none;
-    margin: 0 auto;
-    max-width: 90vw;
+    flex-shrink: 1;
+    max-width: 58vw;
   }
-  .art-wall { padding: 28px 20px; }
-  .art-acronym { gap: 12px; }
-  .art-word .letter { font-size: 28px; }
-  .art-word .meaning { font-size: 8px; letter-spacing: 2px; }
-  .art-tagline { font-size: 13px; letter-spacing: 2px; }
+  .art-wall { padding: 20px 16px; }
+  .art-acronym { gap: 10px; }
+  .art-word .letter { font-size: 22px; }
+  .art-word .meaning { font-size: 7px; letter-spacing: 2px; }
+  .art-tagline { font-size: 11px; letter-spacing: 1px; }
 
-  /* Sparkle — centered below ART wall */
+  /* Air ribbons — subtle behind content */
+  .air-stream-layer {
+    position: absolute;
+    opacity: 0.35;
+    animation: none;
+    z-index: 0;
+  }
+
+  /* Sparkle */
   .art-sparkle { opacity: 1; animation: none; }
 
-  /* Scroll cue — pull out of absolute, center below hero */
+  /* Scroll cue — center below hero */
   .scroll-cue {
     position: relative !important;
     bottom: auto !important;
@@ -1124,7 +1146,7 @@ h1, h2, h3, h4, h5, h6,
     transform: none !important;
     opacity: 1 !important;
     animation: none !important;
-    margin: 28px auto 0;
+    margin: 20px auto 0;
     text-align: center;
     width: 100%;
   }
@@ -1203,14 +1225,16 @@ h1, h2, h3, h4, h5, h6,
 /* Small phones */
 @media (max-width: 480px) {
   .hero { padding: 80px 16px 32px; }
-  .deer-layer { width: 65px; }
-  .wordmark-layer img { width: 60vw; max-width: 220px; }
-  .art-wall { padding: 22px 16px; }
-  .art-word .letter { font-size: 24px; }
-  .art-word .meaning { font-size: 7px; }
-  .art-tagline { font-size: 11px; letter-spacing: 1px; }
-  .art-sparkle .stars svg { width: 18px; height: 18px; }
-  .art-sparkle .sparkle-text { font-size: 13px; }
+  .hero { padding: 80px 12px 32px; }
+  .deer-layer { width: 70px; }
+  .wordmark-layer img { width: 55vw; max-width: 200px; }
+  .art-wall { padding: 18px 12px; }
+  .art-word .letter { font-size: 20px; }
+  .art-word .meaning { font-size: 6px; }
+  .art-tagline { font-size: 10px; letter-spacing: 1px; }
+  .art-sparkle .stars svg { width: 16px; height: 16px; }
+  .art-sparkle .sparkle-text { font-size: 12px; }
+  .hero-middle-row { gap: 8px; }
 
   .services-header h2 { font-size: 24px; }
 
@@ -1251,77 +1275,73 @@ h1, h2, h3, h4, h5, h6,
      HERO SECTION
      ============================================ -->
 <section class="hero" id="hero">
-  <div class="hero-composition">
-
-    <!-- LAYER 1: Deer -->
-    <div class="deer-layer">
-      <img src="DEAR AIR,_Standing Deer.png" alt="Dear Air Silver Deer">
-    </div>
-
-    <!-- LAYER 2: Animated Air Stream -->
-    <div class="air-stream-layer">
-          <svg class="air-stream-svg" viewBox="0 0 2400 520" preserveAspectRatio="none">
-            <defs>
-              <mask id="slice-mask" maskUnits="userSpaceOnUse" x="0" y="0" width="2400" height="520">
-                <rect width="2400" height="520" fill="white"/>
-              </mask>
-            </defs>
-            <g mask="url(#slice-mask)">
-              <path class="air-ribbon ribbon-5" d="M-100,390 C50,370 200,330 350,355 C500,380 570,420 720,395 C870,370 950,320 1100,345 C1250,370 1320,420 1470,395 C1620,370 1700,320 1850,345 C2000,370 2070,420 2220,395 L2400,385"/>
-              <path class="air-ribbon ribbon-3" d="M-100,400 C50,382 150,340 300,358 C450,376 520,418 670,396 C820,374 890,320 1040,342 C1190,364 1260,418 1410,390 C1560,362 1630,320 1780,342 C1930,364 2000,418 2150,390 L2400,378"/>
-              <path class="air-ribbon ribbon-1" d="M-100,358 C50,338 170,300 320,320 C470,340 540,382 690,362 C840,342 910,290 1060,312 C1210,334 1280,382 1430,360 C1580,338 1650,290 1800,312 C1950,334 2020,382 2170,360 L2400,350"/>
-              <path class="air-ribbon ribbon-2" d="M-100,430 C50,448 180,414 330,428 C480,442 550,465 700,445 C850,425 920,392 1070,412 C1220,432 1290,465 1440,442 C1590,419 1660,392 1810,412 C1960,432 2030,465 2180,442 L2400,430"/>
-              <path class="air-ribbon ribbon-4" d="M-100,375 C50,362 140,328 290,345 C440,362 510,392 660,375 C810,358 880,318 1030,338 C1180,358 1250,392 1400,372 C1550,352 1620,318 1770,338 C1920,358 1990,392 2140,372 L2400,362"/>
-              <g class="loop-group">
-                <path class="air-loop" data-loop-id="0" d="M50,362 C100,355 140,340 200,345 C260,350 320,362 380,370 C420,375 450,378 470,370 C485,358 495,340 498,322 C500,302 492,286 478,282 C462,278 448,288 444,305 C440,322 448,342 462,355 C478,368 498,375 530,380 C580,388 640,392 700,388 C760,384 820,375 880,370"/>
-                <path class="air-loop" data-loop-id="1" d="M500,396 C560,388 620,376 680,370 C740,364 800,358 860,362 C900,366 930,372 945,365 C958,354 966,336 968,318 C970,298 962,282 948,278 C932,274 918,284 916,302 C914,320 922,340 938,354 C954,368 978,376 1010,380 C1060,386 1120,390 1180,386 C1240,382 1300,374 1360,368"/>
-                <path class="air-loop" data-loop-id="2" d="M950,312 C1010,320 1060,330 1120,338 C1180,346 1230,354 1280,360 C1310,364 1335,366 1348,358 C1360,346 1368,328 1370,310 C1372,290 1364,274 1350,270 C1334,266 1320,276 1318,294 C1316,312 1324,332 1340,346 C1356,360 1378,368 1410,372 C1460,378 1520,380 1580,376 C1640,372 1700,364 1760,358"/>
-                <path class="air-loop" data-loop-id="3" d="M1350,395 C1410,388 1470,376 1530,370 C1590,364 1640,358 1690,365 C1720,370 1740,374 1752,366 C1764,354 1772,336 1774,318 C1776,298 1768,282 1754,278 C1738,274 1724,284 1722,302 C1720,320 1728,340 1744,354 C1760,368 1782,376 1814,380 C1864,386 1920,392 1980,390 C2040,388 2100,382 2160,378"/>
-              </g>
-            </g>
-          </svg>
-        </div>
-
-        <!-- LAYER 3: Wordmark -->
-        <div class="wordmark-layer">
-          <img src="DEAR AIR,_Wordmark.png" alt="Dear Air, Wordmark">
-        </div>
-
-      </div>
-    </div>
-
+  <!-- Air ribbons — behind everything -->
+  <div class="air-stream-layer">
+    <svg class="air-stream-svg" viewBox="0 0 2400 520" preserveAspectRatio="none">
+      <defs>
+        <mask id="slice-mask" maskUnits="userSpaceOnUse" x="0" y="0" width="2400" height="520">
+          <rect width="2400" height="520" fill="white"/>
+        </mask>
+      </defs>
+      <g mask="url(#slice-mask)">
+        <path class="air-ribbon ribbon-5" d="M-100,390 C50,370 200,330 350,355 C500,380 570,420 720,395 C870,370 950,320 1100,345 C1250,370 1320,420 1470,395 C1620,370 1700,320 1850,345 C2000,370 2070,420 2220,395 L2400,385"/>
+        <path class="air-ribbon ribbon-3" d="M-100,400 C50,382 150,340 300,358 C450,376 520,418 670,396 C820,374 890,320 1040,342 C1190,364 1260,418 1410,390 C1560,362 1630,320 1780,342 C1930,364 2000,418 2150,390 L2400,378"/>
+        <path class="air-ribbon ribbon-1" d="M-100,358 C50,338 170,300 320,320 C470,340 540,382 690,362 C840,342 910,290 1060,312 C1210,334 1280,382 1430,360 C1580,338 1650,290 1800,312 C1950,334 2020,382 2170,360 L2400,350"/>
+        <path class="air-ribbon ribbon-2" d="M-100,430 C50,448 180,414 330,428 C480,442 550,465 700,445 C850,425 920,392 1070,412 C1220,432 1290,465 1440,442 C1590,419 1660,392 1810,412 C1960,432 2030,465 2180,442 L2400,430"/>
+        <path class="air-ribbon ribbon-4" d="M-100,375 C50,362 140,328 290,345 C440,362 510,392 660,375 C810,358 880,318 1030,338 C1180,358 1250,392 1400,372 C1550,352 1620,318 1770,338 C1920,358 1990,392 2140,372 L2400,362"/>
+        <g class="loop-group">
+          <path class="air-loop" data-loop-id="0" d="M50,362 C100,355 140,340 200,345 C260,350 320,362 380,370 C420,375 450,378 470,370 C485,358 495,340 498,322 C500,302 492,286 478,282 C462,278 448,288 444,305 C440,322 448,342 462,355 C478,368 498,375 530,380 C580,388 640,392 700,388 C760,384 820,375 880,370"/>
+          <path class="air-loop" data-loop-id="1" d="M500,396 C560,388 620,376 680,370 C740,364 800,358 860,362 C900,366 930,372 945,365 C958,354 966,336 968,318 C970,298 962,282 948,278 C932,274 918,284 916,302 C914,320 922,340 938,354 C954,368 978,376 1010,380 C1060,386 1120,390 1180,386 C1240,382 1300,374 1360,368"/>
+          <path class="air-loop" data-loop-id="2" d="M950,312 C1010,320 1060,330 1120,338 C1180,346 1230,354 1280,360 C1310,364 1335,366 1348,358 C1360,346 1368,328 1370,310 C1372,290 1364,274 1350,270 C1334,266 1320,276 1318,294 C1316,312 1324,332 1340,346 C1356,360 1378,368 1410,372 C1460,378 1520,380 1580,376 C1640,372 1700,364 1760,358"/>
+          <path class="air-loop" data-loop-id="3" d="M1350,395 C1410,388 1470,376 1530,370 C1590,364 1640,358 1690,365 C1720,370 1740,374 1752,366 C1764,354 1772,336 1774,318 C1776,298 1768,282 1754,278 C1738,274 1724,284 1722,302 C1720,320 1728,340 1744,354 C1760,368 1782,376 1814,380 C1864,386 1920,392 1980,390 C2040,388 2100,382 2160,378"/>
+        </g>
+      </g>
+    </svg>
   </div>
 
-  <!-- ART wall — overlays hero, right-aligned -->
-  <div class="art-wall-wrapper">
-    <div class="art-wall">
-      <div class="art-acronym">
-        <div class="art-word">
-          <span class="letter">A</span>
-          <span class="full-word">Available</span>
-        </div>
-        <div class="art-word">
-          <span class="letter">R</span>
-          <span class="full-word">Responsive</span>
-        </div>
-        <div class="art-word">
-          <span class="letter">T</span>
-          <span class="full-word">Transparent</span>
-        </div>
-      </div>
-      <div class="art-tagline">
-        The <em>ART</em> of Dear Air<br>HVAC Solutions
-      </div>
+  <div class="hero-composition">
+    <!-- Wordmark -->
+    <div class="wordmark-layer">
+      <img src="DEAR AIR,_Wordmark.png" alt="Dear Air, Wordmark">
     </div>
-    <div class="art-sparkle">
-      <div class="stars">
-        <svg viewBox="0 0 20 20"><polygon points="10,1 12.6,7.2 19.5,7.6 14,12 15.8,18.9 10,15.4 4.2,18.9 6,12 0.5,7.6 7.4,7.2" fill="#F5C518"/></svg>
-        <svg viewBox="0 0 20 20"><polygon points="10,1 12.6,7.2 19.5,7.6 14,12 15.8,18.9 10,15.4 4.2,18.9 6,12 0.5,7.6 7.4,7.2" fill="#F5C518"/></svg>
-        <svg viewBox="0 0 20 20"><polygon points="10,1 12.6,7.2 19.5,7.6 14,12 15.8,18.9 10,15.4 4.2,18.9 6,12 0.5,7.6 7.4,7.2" fill="#F5C518"/></svg>
-        <svg viewBox="0 0 20 20"><polygon points="10,1 12.6,7.2 19.5,7.6 14,12 15.8,18.9 10,15.4 4.2,18.9 6,12 0.5,7.6 7.4,7.2" fill="#F5C518"/></svg>
-        <svg viewBox="0 0 20 20"><polygon points="10,1 12.6,7.2 19.5,7.6 14,12 15.8,18.9 10,15.4 4.2,18.9 6,12 0.5,7.6 7.4,7.2" fill="#F5C518"/></svg>
+
+    <!-- Deer + ART wall row (side by side on mobile, absolute on desktop) -->
+    <div class="hero-middle-row">
+      <div class="deer-layer">
+        <img src="DEAR AIR,_Standing Deer.png" alt="Dear Air Silver Deer">
+        <div class="deer-shadow-static"></div>
       </div>
-      <span class="sparkle-text">"Sparkle."</span>
+      <div class="art-wall-wrapper">
+        <div class="art-wall">
+          <div class="art-acronym">
+            <div class="art-word">
+              <span class="letter">A</span>
+              <span class="full-word">Available</span>
+            </div>
+            <div class="art-word">
+              <span class="letter">R</span>
+              <span class="full-word">Responsive</span>
+            </div>
+            <div class="art-word">
+              <span class="letter">T</span>
+              <span class="full-word">Transparent</span>
+            </div>
+          </div>
+          <div class="art-tagline">
+            The <em>ART</em> of Dear Air<br>HVAC Solutions
+          </div>
+        </div>
+        <div class="art-sparkle">
+          <div class="stars">
+            <svg viewBox="0 0 20 20"><polygon points="10,1 12.6,7.2 19.5,7.6 14,12 15.8,18.9 10,15.4 4.2,18.9 6,12 0.5,7.6 7.4,7.2" fill="#F5C518"/></svg>
+            <svg viewBox="0 0 20 20"><polygon points="10,1 12.6,7.2 19.5,7.6 14,12 15.8,18.9 10,15.4 4.2,18.9 6,12 0.5,7.6 7.4,7.2" fill="#F5C518"/></svg>
+            <svg viewBox="0 0 20 20"><polygon points="10,1 12.6,7.2 19.5,7.6 14,12 15.8,18.9 10,15.4 4.2,18.9 6,12 0.5,7.6 7.4,7.2" fill="#F5C518"/></svg>
+            <svg viewBox="0 0 20 20"><polygon points="10,1 12.6,7.2 19.5,7.6 14,12 15.8,18.9 10,15.4 4.2,18.9 6,12 0.5,7.6 7.4,7.2" fill="#F5C518"/></svg>
+            <svg viewBox="0 0 20 20"><polygon points="10,1 12.6,7.2 19.5,7.6 14,12 15.8,18.9 10,15.4 4.2,18.9 6,12 0.5,7.6 7.4,7.2" fill="#F5C518"/></svg>
+          </div>
+          <span class="sparkle-text">"Sparkle."</span>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -1928,6 +1948,10 @@ h1, h2, h3, h4, h5, h6,
       sign.style.clipPath = `inset(0 ${clipRight}px 0 0)`;
     } else {
       sign.style.clipPath = 'none';
+      // Park van fully right on mobile
+      const mobileVanWidth = vanImg.offsetWidth || 200;
+      vanContainer.style.transform = `translateX(${frameWidth - mobileVanWidth + 20}px)`;
+      return; // Skip desktop van animation on mobile
     }
 
     requestAnimationFrame(updateVan);
