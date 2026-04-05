@@ -1091,22 +1091,22 @@ h1, h2, h3, h4, h5, h6,
   }
   .wordmark-layer img { width: 55vw; max-width: 220px; }
 
-  /* Deer — positioned absolutely next to wordmark */
+  /* Deer — positioned absolutely to the left of wordmark */
   .deer-layer {
     position: absolute !important;
     bottom: auto !important;
-    left: auto !important;
-    top: 10px;
-    right: calc(50% + 100px);
-    width: 70px;
+    left: 8px !important;
+    top: 20px;
+    right: auto !important;
+    width: 65px;
     opacity: 1;
     animation: none;
     z-index: 21;
   }
 
-  /* Middle row — just contains ART wall below wordmark+deer */
+  /* Middle row — static so deer's absolute positioning refs hero-composition */
   .hero-middle-row {
-    position: relative !important;
+    position: static !important;
     top: auto; left: auto;
     width: 100%;
     height: auto;
@@ -1234,7 +1234,7 @@ h1, h2, h3, h4, h5, h6,
 /* Small phones */
 @media (max-width: 480px) {
   .hero { padding: 80px 12px 32px; }
-  .deer-layer { width: 55px; right: calc(50% + 85px); }
+  .deer-layer { width: 50px; left: 4px !important; top: 25px; }
   .wordmark-layer img { width: 50vw; max-width: 190px; }
   .art-wall-wrapper { max-width: 80vw; width: 80vw; }
   .art-wall { padding: 14px 10px; }
