@@ -1172,11 +1172,11 @@ h1, h2, h3, h4, h5, h6,
   .trust-item .trust-label { font-size: 10px; letter-spacing: 2px; }
 
   /* Van section — van above sign, parks right */
-  .construction-frame { height: 260px; }
-  .van-container { z-index: 10; }
+  .construction-frame { height: 280px; }
+  .van-container { z-index: 10; bottom: 90px; }
   .van-wrapper img.van-img { height: 120px; }
   .construction-sign {
-    bottom: 30px;
+    bottom: 85px;
     clip-path: none !important;
     opacity: 1;
     white-space: normal;
@@ -1245,11 +1245,12 @@ h1, h2, h3, h4, h5, h6,
 
   .services-header h2 { font-size: 24px; }
 
-  .construction-frame { height: 180px; }
+  .construction-frame { height: 220px; }
+  .van-container { bottom: 80px; }
   .van-wrapper img.van-img { height: 100px; }
   .sign-inner h2 { font-size: 20px; }
   .sign-inner p { font-size: 10px; letter-spacing: 3px; }
-  .construction-sign { bottom: 45px; }
+  .construction-sign { bottom: 75px; }
 
   .career-pillars { grid-template-columns: 1fr; max-width: 260px; }
   .career-section h2 { font-size: 28px; }
@@ -1923,22 +1924,39 @@ h1, h2, h3, h4, h5, h6,
     const frameRect = constructionFrame.getBoundingClientRect();
     const viewHeight = window.innerHeight;
     const frameHeight = constructionFrame.offsetHeight;
+    const isMobile = window.innerWidth <= 768;
 
-    const entryPoint = viewHeight - frameHeight;
-    const completePoint = viewHeight * 0.4;
+    // Mobile: animation starts later and completes later so van visibly drives across
+    const entryPoint = isMobile ? viewHeight : viewHeight - frameHeight;
+    const completePoint = isMobile ? viewHeight * 0.2 : viewHeight * 0.4;
     const currentPos = frameRect.top;
 
     const rawT = (entryPoint - currentPos) / (entryPoint - completePoint);
     const t = Math.max(0, Math.min(1, rawT));
 
     const frameWidth = constructionFrame.offsetWidth;
-    const vanWidth = getVanWidth();
-    const startX = -vanWidth * 0.55;
-    const parkX = frameWidth - vanWidth * 0.55;
-    const eased = 1 - Math.pow(1 - t, 2.5);
-    const x = startX + eased * (parkX - startX);
 
-    vanContainer.style.transform = `translateX(${x}px)`;
+    if (isMobile) {
+      // Mobile: use actual rendered van width, park with ~80% visible
+      sign.style.clipPath = 'none';
+      const mobileVanWidth = vanImg.offsetWidth || 200;
+      const mobileStartX = -mobileVanWidth;
+      const mobileEndX = frameWidth - mobileVanWidth * 0.8;
+      const mobileEased = 1 - Math.pow(1 - t, 2.5);
+      const mobileX = mobileStartX + mobileEased * (mobileEndX - mobileStartX);
+      vanContainer.style.transform = `translateX(${mobileX}px)`;
+    } else {
+      // Desktop: original behavior with sign clip-path reveal
+      const vanWidth = getVanWidth();
+      const startX = -vanWidth * 0.55;
+      const parkX = frameWidth - vanWidth * 0.55;
+      const eased = 1 - Math.pow(1 - t, 2.5);
+      const x = startX + eased * (parkX - startX);
+      vanContainer.style.transform = `translateX(${x}px)`;
+
+      const clipRight = Math.max(0, frameWidth - x);
+      sign.style.clipPath = `inset(0 ${clipRight}px 0 0)`;
+    }
 
     if (t > 0.03 && t < 0.95) {
       const vibTime = performance.now();
@@ -1948,25 +1966,12 @@ h1, h2, h3, h4, h5, h6,
       vanContainer.style.marginBottom = '0px';
     }
 
-    const vanLeft = x;
-    // On mobile: van animates but parks fully right, sign always visible
-    if (window.innerWidth <= 768) {
-      sign.style.clipPath = 'none';
-      // Override park position to right edge
-      const mobileVanWidth = vanImg.offsetWidth || 200;
-      const mobileEndX = frameWidth - mobileVanWidth * 0.35;
-      const mobileEased = 1 - Math.pow(1 - t, 2.5);
-      const mobileX = startX + mobileEased * (mobileEndX - startX);
-      vanContainer.style.transform = `translateX(${mobileX}px)`;
-    } else {
-      const clipRight = Math.max(0, frameWidth - vanLeft);
-      sign.style.clipPath = `inset(0 ${clipRight}px 0 0)`;
-    }
-
     requestAnimationFrame(updateVan);
   }
 
-  vanContainer.style.transform = `translateX(${-getVanWidth() * 0.55}px)`;
+  // Initial position: hide van off-screen left
+  const initVanWidth = (window.innerWidth <= 768) ? (vanImg.offsetWidth || 200) : getVanWidth();
+  vanContainer.style.transform = `translateX(${-initVanWidth}px)`;
   requestAnimationFrame(updateVan);
 
   // ============================================
